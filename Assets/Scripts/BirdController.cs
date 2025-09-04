@@ -70,4 +70,15 @@ public class BirdController : MonoBehaviour
     {
         RemoveJumpListener();
     }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.CompareTag("Obstacle"))
+        {
+            print("GameOver");
+            RemoveJumpListener();
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Game");
+            
+        }
+    }
 }

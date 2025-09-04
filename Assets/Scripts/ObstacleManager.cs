@@ -37,8 +37,13 @@ public class ObstacleManager : MonoBehaviour
     {
         _top =  new List<GameObject>();
         _bottom = new List<GameObject>();
-        SpawnObstacle();
         framesBetweenSpawn = (int)(waitBetweenSpawnSeconds * 60);
+        
+        SpawnObstacle();
+        for (int i = 0; i < 400; i++)
+        {
+            Update();
+        }
     }
 
     // Update is called once per frame
