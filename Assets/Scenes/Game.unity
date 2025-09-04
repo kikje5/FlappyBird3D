@@ -152,9 +152,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a49320ad4c86d0949819f35441f77271, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameHasStarted: 0
   _bird: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  _jumpStength: 10
-  _moveStrength: 5
+  jumpStength: 10
+  moveStrength: 10
 --- !u!54 &62356508
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -315,6 +316,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f24eebecb640a242869864a86f117fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  birdController: {fileID: 62356507}
+  topObstacle: {fileID: 6779022541730280746, guid: 411a2adc6588d884aba162c2dbe2c346, type: 3}
+  bottomObstacle: {fileID: 2560551328660556816, guid: bc755fa68be221242bd0abfc605488cf, type: 3}
+  obstacleSpeed: 0.25
+  whereToRemoveObjects: -4
+  whereToSpawnObjects: 150
+  spawnSpeed: 0.5
+  removalSpeed: 0.25
+  waitBetweenSpawnSeconds: 6
+  minGap: 2
+  maxGap: 6
+  minYGap: -2
+  maxYGap: 4
 --- !u!1 &330585543
 GameObject:
   m_ObjectHideFlags: 0

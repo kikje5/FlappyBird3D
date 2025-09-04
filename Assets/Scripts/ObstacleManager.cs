@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ObstacleManager : MonoBehaviour
 {
+    public BirdController birdController;
     public GameObject topObstacle;
     public GameObject bottomObstacle;
     
@@ -42,12 +43,18 @@ public class ObstacleManager : MonoBehaviour
         SpawnObstacle();
         for (int i = 0; i < 400; i++)
         {
-            Update();
+            doUpdate();
         }
     }
 
     // Update is called once per frame
     void Update()
+    {
+        if (!birdController.gameHasStarted) return;
+        doUpdate();
+    }
+
+    void doUpdate()
     {
         HandleRemovingObstacles();
         MoveObstacles();
