@@ -7,6 +7,7 @@ public class ObstacleManager : MonoBehaviour
     public BirdController birdController;
     public GameObject topObstacle;
     public GameObject bottomObstacle;
+    public GameObject scoreTrigger;
     
     private GameObject _topObstacleToSpawn;
     private GameObject _bottomObstacleToSpawn;
@@ -33,9 +34,14 @@ public class ObstacleManager : MonoBehaviour
     public float maxYGap;
 
     private bool _isSpawning;
+
+    private GameObject _topObstacles;
+    private GameObject _bottomObstacles;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        _topObstacles = new GameObject("topObstacles");
+        _bottomObstacles = new GameObject("bottomObstacles");
         _top =  new List<GameObject>();
         _bottom = new List<GameObject>();
         framesBetweenSpawn = (int)(waitBetweenSpawnSeconds * 60);
@@ -43,33 +49,33 @@ public class ObstacleManager : MonoBehaviour
         SpawnObstacle();
         for (int i = 0; i < 400; i++)
         {
-            doUpdate();
+            DoUpdate();
         }
+        
     }
 
     // Update is called once per frame
     void Update()
     {
         if (!birdController.gameHasStarted) return;
-        doUpdate();
+        DoUpdate();
     }
 
-    void doUpdate()
+    private void DoUpdate()
     {
         HandleRemovingObstacles();
         MoveObstacles();
-        HandleSpawningTopObstacles();
-        HandleSpawningBottomObstacles();
-        if(!_isSpawning)
+        HandleSpawning_topObstacles();
+        HandleSpawning_bottomObstacles();
+        if (_isSpawning) return;
+        
+        if (framesSinceLastSpawn >= framesBetweenSpawn)
         {
-            if (framesSinceLastSpawn >= framesBetweenSpawn)
-            {
-                framesSinceLastSpawn = 0;
-                SpawnObstacle();
-            }
-
-            framesSinceLastSpawn++;
+            framesSinceLastSpawn = 0;
+            SpawnObstacle();
         }
+
+        framesSinceLastSpawn++;
     }
 
     private void HandleRemovingObstacles()
@@ -85,7 +91,7 @@ public class ObstacleManager : MonoBehaviour
         }
     }
 
-    private void HandleSpawningTopObstacles()
+    private void HandleSpawning_topObstacles()
     {
         if (!_topObstacleToSpawn) return;
         _topObstacleToSpawn.transform.position += new Vector3(0, -1, 0) * spawnSpeed;
@@ -98,7 +104,7 @@ public class ObstacleManager : MonoBehaviour
         _isSpawning = false;
     }
 
-    private void HandleSpawningBottomObstacles()
+    private void HandleSpawning_bottomObstacles()
     {
         if (!_bottomObstacleToSpawn) return;
         _bottomObstacleToSpawn.transform.position += new Vector3(0, 1, 0) * spawnSpeed;
@@ -149,7 +155,7 @@ public class ObstacleManager : MonoBehaviour
         float rightGap = Random.Range(minGap, maxGap);
         rightGap /= 2;
         float rightYGap = Random.Range(minYGap, maxYGap);
-        GameObject top = Instantiate(new GameObject("TopObstacles"), transform);
+        GameObject top = Instantiate(_topObstacles, transform);
 
         GameObject topLeft = Instantiate(topObstacle, top.transform);
         topLeft.transform.position += new Vector3(-7, leftYGap + leftGap, 0);
@@ -161,7 +167,7 @@ public class ObstacleManager : MonoBehaviour
         topRight.transform.position += new Vector3(7, rightYGap + rightGap, 0);
         
         
-        GameObject bottom = Instantiate(new GameObject("BottomObstacles"), transform);
+        GameObject bottom = Instantiate(_bottomObstacles, transform);
         
         GameObject bottomLeft = Instantiate(bottomObstacle, bottom.transform);
         bottomLeft.transform.position += new Vector3(-7, leftYGap - leftGap, 0);
@@ -171,6 +177,8 @@ public class ObstacleManager : MonoBehaviour
         
         GameObject bottomRight = Instantiate(bottomObstacle, bottom.transform);
         bottomRight.transform.position += new Vector3(7, rightYGap - rightGap, 0);
+        
+        Instantiate(scoreTrigger, bottom.transform);
         
         
         top.transform.position += new Vector3(0, 15, whereToSpawnObjects);

@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -12,6 +13,8 @@ public class BirdController : MonoBehaviour
     private Rigidbody _rb;
     [SerializeField] private float jumpStength;
     [SerializeField] private float moveStrength;
+    public int score;
+    public TextMeshProUGUI  scoreText;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
@@ -22,6 +25,8 @@ public class BirdController : MonoBehaviour
             _rb = GetComponent<Rigidbody>();
             _rb.useGravity = false;
             OnJumpEnable();
+            score = 0;
+            UpdateScoreText();
     }
     
 
@@ -79,5 +84,18 @@ public class BirdController : MonoBehaviour
             UnityEngine.SceneManagement.SceneManager.LoadScene("Game");
             
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!other.gameObject.CompareTag("Score")) return;
+        print("Scored");
+        score++;
+        UpdateScoreText();
+    }
+
+    private void UpdateScoreText()
+    {
+        scoreText.text = "Score: " +score;
     }
 }
