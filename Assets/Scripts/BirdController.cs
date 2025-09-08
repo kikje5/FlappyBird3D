@@ -14,7 +14,7 @@ public class BirdController : MonoBehaviour
     [SerializeField] private float jumpStength;
     [SerializeField] private float moveStrength;
     public int score;
-    public TextMeshProUGUI  scoreText;
+    public Score scoreObject;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Start()
@@ -96,6 +96,6 @@ public class BirdController : MonoBehaviour
 
     private void UpdateScoreText()
     {
-        scoreText.text = "Score: " +score;
+        scoreObject.score = score;
     }
 }

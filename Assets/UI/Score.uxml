@@ -1,0 +1,11 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/SimpleCustomEditor.uss?fileID=7433441132597879392&amp;guid=2df12823a26c8bb48b0d11161e05f762&amp;type=3#SimpleCustomEditor" />
+    <ui:VisualElement style="flex-grow: 1; flex-direction: row;">
+        <ui:Label text="Score:" language-direction="Inherit" focusable="false" data-source-type="BirdController, Assembly-CSharp" data-source-path="score" data-source="project://database/Assets/Score.asset?fileID=11400000&amp;guid=c98dbf07f8a527341aee7f6e10976516&amp;type=2#Score" name="scoreLabel" class="score-text" style="flex-direction: row;" />
+        <ui:Label text="...&#10;" name="score" class="score-text" style="flex-direction: row;">
+            <Bindings>
+                <ui:DataBinding property="text" data-source-path="score" data-source="project://database/Assets/Scripts/Score.asset?fileID=11400000&amp;guid=aaeaddb3d24c19642a8e78ec0050c390&amp;type=2#Score" binding-mode="ToTarget" />
+            </Bindings>
+        </ui:Label>
+    </ui:VisualElement>
+</ui:UXML>
