@@ -1,10 +1,11 @@
+using System;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class ObstacleManager : MonoBehaviour
 {
-    public BirdController birdController;
+    public Global global;
     public GameObject topObstacle;
     public GameObject bottomObstacle;
     public GameObject scoreTrigger;
@@ -46,18 +47,36 @@ public class ObstacleManager : MonoBehaviour
         _bottom = new List<GameObject>();
         framesBetweenSpawn = (int)(waitBetweenSpawnSeconds * 60);
         
+        Reset();
+    }
+
+    private void Reset()
+    {
+        foreach (GameObject obstacle in _top)
+        {
+            Destroy(obstacle);
+        }
+
+        foreach (GameObject obstacle in _bottom)
+        {
+            Destroy(obstacle);
+        }
+        _top.Clear();
+        _bottom.Clear();
         SpawnObstacle();
         for (int i = 0; i < 400; i++)
         {
             DoUpdate();
         }
-        
+        global.resetObstacles = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!birdController.gameHasStarted) return;
+        if (global.isDead) return;
+        if (global.resetObstacles) Reset();
+        if (!global.isPlaying) return;
         DoUpdate();
     }
 
