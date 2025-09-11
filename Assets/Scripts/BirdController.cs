@@ -1,7 +1,3 @@
-using System;
-using System.Linq;
-using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
@@ -84,13 +80,20 @@ public class BirdController : MonoBehaviour
         _gameOverUIDocument.enabled = true;
         global.isDead = true;
         global.isPlaying = false;
+        FreezeBird();
         OnJumpDisable();
+    }
+
+    public void FreezeBird()
+    {
+        _rb.useGravity = false;
+        _rb.linearVelocity = Vector3.zero;
+        _rb.angularVelocity = Vector3.zero;
+        transform.position = new Vector3(transform.position.x, transform.position.y, -1);
     }
     public void Reset()
     {
-        _rb.linearVelocity = Vector3.zero;
         transform.position = Vector3.zero;
-        _rb.useGravity = false;
         global.score = 0;
         global.resetBird = false;
         OnJumpEnable();

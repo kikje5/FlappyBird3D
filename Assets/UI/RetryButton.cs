@@ -20,7 +20,6 @@ public class NewMonoBehaviourScript : MonoBehaviour
     {
         Debug.Log("OnResetClick");
         global.isDead = false;
-        global.resetBird = true;
         global.resetObstacles = true;
     }
 }

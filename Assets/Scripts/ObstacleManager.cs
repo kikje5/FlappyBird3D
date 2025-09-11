@@ -69,6 +69,7 @@ public class ObstacleManager : MonoBehaviour
             DoUpdate();
         }
         global.resetObstacles = false;
+        global.resetBird = true;
     }
 
     // Update is called once per frame
