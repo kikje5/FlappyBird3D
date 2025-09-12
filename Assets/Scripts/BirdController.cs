@@ -5,6 +5,9 @@ using UnityEngine.UIElements;
 public class BirdController : MonoBehaviour
 {
     [SerializeField] private InputActionAsset _bird;
+    public AudioSource jumpAudio;
+    public float jumpPitchRange;
+    public AudioSource deathAudio;
     private InputAction _jump;
     private InputAction _move;
     private Rigidbody _rb;
@@ -61,6 +64,8 @@ public class BirdController : MonoBehaviour
         _rb.linearVelocity = new Vector3(_rb.linearVelocity.x, jumpStength, 0);
         global.isPlaying = true;
         _rb.useGravity = true;
+        jumpAudio.pitch = Random.Range(0.5f, 0.5f + jumpPitchRange);
+        jumpAudio.Play();
     }
 
     private void Move()
@@ -80,12 +85,13 @@ public class BirdController : MonoBehaviour
         _gameOverUIDocument.enabled = true;
         global.isDead = true;
         global.isPlaying = false;
-        FreezeBird();
+        KillBird();
         OnJumpDisable();
     }
 
-    public void FreezeBird()
+    private void KillBird()
     {
+        deathAudio.Play();
         _rb.useGravity = false;
         _rb.linearVelocity = Vector3.zero;
         _rb.angularVelocity = Vector3.zero;
