@@ -11,6 +11,7 @@ public class BirdController : MonoBehaviour
     private InputAction _jump;
     private InputAction _move;
     private Rigidbody _rb;
+    private ParticleSystem _particles;
     [SerializeField] private float jumpStength;
     [SerializeField] private float moveStrength;
     public Global global;
@@ -23,6 +24,7 @@ public class BirdController : MonoBehaviour
             _jump = _bird["Jump"];
             _move = _bird["Move"];
             _rb = GetComponent<Rigidbody>();
+            _particles = GetComponent<ParticleSystem>();
             _rb.useGravity = false;
             OnJumpEnable();
             global.score = 0;
@@ -66,6 +68,7 @@ public class BirdController : MonoBehaviour
         _rb.useGravity = true;
         jumpAudio.pitch = Random.Range(0.5f, 0.5f + jumpPitchRange);
         jumpAudio.Play();
+        _particles.Play();
     }
 
     private void Move()

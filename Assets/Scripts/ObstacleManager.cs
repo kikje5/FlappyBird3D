@@ -25,8 +25,7 @@ public class ObstacleManager : MonoBehaviour
     public float spawnSpeed;
     public float removalSpeed;
     public float waitBetweenSpawnSeconds;
-    private int framesBetweenSpawn;
-    private int framesSinceLastSpawn = 0;
+    private float timeSinceLastSpawn = 0;
     
     public float minGap;
     public float maxGap;
@@ -45,8 +44,6 @@ public class ObstacleManager : MonoBehaviour
         _bottomObstacles = new GameObject("bottomObstacles");
         _top =  new List<GameObject>();
         _bottom = new List<GameObject>();
-        framesBetweenSpawn = (int)(waitBetweenSpawnSeconds * 60);
-        
         Reset();
     }
 
@@ -66,7 +63,7 @@ public class ObstacleManager : MonoBehaviour
         SpawnObstacle();
         for (int i = 0; i < 400; i++)
         {
-            DoUpdate();
+            DoUpdate(0.01f);
         }
         global.resetObstacles = false;
         global.resetBird = true;
@@ -78,24 +75,24 @@ public class ObstacleManager : MonoBehaviour
         if (global.isDead) return;
         if (global.resetObstacles) Reset();
         if (!global.isPlaying) return;
-        DoUpdate();
+        DoUpdate(Time.deltaTime);
     }
 
-    private void DoUpdate()
+    private void DoUpdate(float time)
     {
         HandleRemovingObstacles();
-        MoveObstacles();
+        MoveObstacles(time);
         HandleSpawning_topObstacles();
         HandleSpawning_bottomObstacles();
         if (_isSpawning) return;
         
-        if (framesSinceLastSpawn >= framesBetweenSpawn)
+        if (timeSinceLastSpawn >= waitBetweenSpawnSeconds)
         {
-            framesSinceLastSpawn = 0;
+            timeSinceLastSpawn = 0;
             SpawnObstacle();
         }
 
-        framesSinceLastSpawn++;
+        timeSinceLastSpawn += Time.deltaTime;
     }
 
     private void HandleRemovingObstacles()
@@ -137,12 +134,12 @@ public class ObstacleManager : MonoBehaviour
         _isSpawning = false;
     }
 
-    private void MoveObstacles()
+    private void MoveObstacles(float time)
     {
         //top obstacles
         foreach (GameObject obs in _top)
         {
-            obs.transform.position += new Vector3(0, 0, -1) * obstacleSpeed;
+            obs.transform.position += new Vector3(0, 0, -1) * (obstacleSpeed * time);
             if (obs.transform.position.z < whereToRemoveObjects)
             {
                 Destroy(_topObstacleToRemove);
@@ -153,7 +150,7 @@ public class ObstacleManager : MonoBehaviour
         //bottom obstacles
         foreach (GameObject obs in _bottom)
         {
-            obs.transform.position += new Vector3(0, 0, -1) * obstacleSpeed;
+            obs.transform.position += new Vector3(0, 0, -1) * (obstacleSpeed * time);
             if (obs.transform.position.z < whereToRemoveObjects)
             {
                 Destroy(_bottomObstacleToRemove);
