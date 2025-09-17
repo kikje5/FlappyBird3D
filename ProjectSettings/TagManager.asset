@@ -7,6 +7,9 @@ TagManager:
   - Obstacle
   - Score
   - Coin
+  - ShieldPowerUp
+  - ShrinkPowerUp
+  - DoublePowerUp
   layers:
   - Default
   - TransparentFX

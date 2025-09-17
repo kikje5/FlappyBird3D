@@ -10,6 +10,8 @@ public class BirdController : MonoBehaviour
     public AudioSource jumpAudio;
     public float jumpPitchRange;
     public AudioSource deathAudio;
+    public float coinPitchRange;
+    public AudioSource coinAudio;
     private InputAction _jump;
     private InputAction _move;
     private Rigidbody _rb;
@@ -139,5 +141,7 @@ public class BirdController : MonoBehaviour
         if (!other.gameObject.CompareTag("Coin")) return;
         global.coins++;
         other.gameObject.SetActive(false);
+        coinAudio.pitch = Random.Range(1f - coinPitchRange, 1f + coinPitchRange);
+        coinAudio.Play();
     }
 }
