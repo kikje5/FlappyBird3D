@@ -5479,6 +5479,7 @@ MonoBehaviour:
   topObstacle: {fileID: 6779022541730280746, guid: 411a2adc6588d884aba162c2dbe2c346, type: 3}
   bottomObstacle: {fileID: 2560551328660556816, guid: bc755fa68be221242bd0abfc605488cf, type: 3}
   scoreTrigger: {fileID: 5144472465209351863, guid: b11e1d07ab46b6a4eaf6d640fc61c346, type: 3}
+  coinPrefab: {fileID: 7035842724349335626, guid: ea558bd693a8d484c9f84a3a14b3c8f6, type: 3}
   obstacleSpeed: 0
   waitBetweenSpawnSeconds: 0
   whereToRemoveObjects: -4

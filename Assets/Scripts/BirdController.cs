@@ -23,6 +23,7 @@ public class BirdController : MonoBehaviour
     private void Awake()
     {
         global.highScore =  PlayerPrefs.GetInt("highScore", 0);
+        global.coins = PlayerPrefs.GetInt("coins", 0);
     }
 
     private void Start()
@@ -90,12 +91,18 @@ public class BirdController : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
+        CheckObstacleCollision(other);
+    }
+
+    private void CheckObstacleCollision(Collision other)
+    {
         if (!other.gameObject.CompareTag("Obstacle")) return;
         _gameOverUIDocument.enabled = true;
         global.IsDead = true;
         global.isPlaying = false;
         KillBird();
     }
+    
 
     private void KillBird()
     {
@@ -106,6 +113,7 @@ public class BirdController : MonoBehaviour
         transform.position = new Vector3(transform.position.x, transform.position.y, -1);
         OnJumpDisable();
         global.SaveHighScore();
+        global.SaveCoins();
     }
     public void Reset()
     {
@@ -117,8 +125,19 @@ public class BirdController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        CheckScoreTrigger(other);
+        CheckCoinTrigger(other);
+    }
+
+    private void CheckScoreTrigger(Collider other)
+    {
         if (!other.gameObject.CompareTag("Score")) return;
-        print("Scored");
         global.Score++; 
+    }
+    private void CheckCoinTrigger(Collider other)
+    {
+        if (!other.gameObject.CompareTag("Coin")) return;
+        global.coins++;
+        other.gameObject.SetActive(false);
     }
 }

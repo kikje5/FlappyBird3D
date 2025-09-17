@@ -9,6 +9,7 @@ public class ObstacleManager : MonoBehaviour
     public GameObject topObstacle;
     public GameObject bottomObstacle;
     public GameObject scoreTrigger;
+    public GameObject coinPrefab;
     
     private GameObject _topObstacleToSpawn;
     private GameObject _bottomObstacleToSpawn;
@@ -188,28 +189,52 @@ public class ObstacleManager : MonoBehaviour
         float rightYGap = Random.Range(minYGap, maxYGap);
         GameObject top = Instantiate(_topObstacles, transform);
 
+        int left = -7;
+        int middle = 0;
+        int right = 7;
+
         GameObject topLeft = Instantiate(topObstacle, top.transform);
-        topLeft.transform.position += new Vector3(-7, leftYGap + leftGap, 0);
+        topLeft.transform.position += new Vector3(left, leftYGap + leftGap, 0);
 
         GameObject topMiddle = Instantiate(topObstacle, top.transform);
-        topMiddle.transform.position += new Vector3(0, middleYGap + middleGap, 0);
+        topMiddle.transform.position += new Vector3(middle, middleYGap + middleGap, 0);
 
         GameObject topRight = Instantiate(topObstacle, top.transform);
-        topRight.transform.position += new Vector3(7, rightYGap + rightGap, 0);
+        topRight.transform.position += new Vector3(right, rightYGap + rightGap, 0);
         
         
         GameObject bottom = Instantiate(_bottomObstacles, transform);
         
         GameObject bottomLeft = Instantiate(bottomObstacle, bottom.transform);
-        bottomLeft.transform.position += new Vector3(-7, leftYGap - leftGap, 0);
+        bottomLeft.transform.position += new Vector3(left, leftYGap - leftGap, 0);
         
         GameObject bottomMiddle = Instantiate(bottomObstacle, bottom.transform);
-        bottomMiddle.transform.position += new Vector3(0, middleYGap - middleGap, 0);
+        bottomMiddle.transform.position += new Vector3(middle, middleYGap - middleGap, 0);
         
         GameObject bottomRight = Instantiate(bottomObstacle, bottom.transform);
-        bottomRight.transform.position += new Vector3(7, rightYGap - rightGap, 0);
+        bottomRight.transform.position += new Vector3(right, rightYGap - rightGap, 0);
         
         Instantiate(scoreTrigger, bottom.transform);
+
+        int coinX;
+        float coinY;
+        if (leftGap < rightGap && leftGap < middleGap) // left is smallest
+        {
+            coinX = left;
+            coinY = leftYGap;
+        }
+        else if (middleGap < rightGap) // middle is smallest
+        {
+            coinX = middle;
+            coinY = middleYGap;
+        }
+        else //right is smallest
+        {
+            coinX = right;
+            coinY = rightYGap;
+        }
+        GameObject coin = Instantiate(coinPrefab, bottom.transform);
+        coin.transform.position += new Vector3(coinX, coinY, 0);
         
         
         top.transform.position += new Vector3(0, 15, whereToSpawnObjects);

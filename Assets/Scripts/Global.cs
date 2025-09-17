@@ -17,6 +17,7 @@ public class Global : ScriptableObject
         }
     }
     public int highScore = 0;
+    public int coins = 0;
     public bool isPlaying = false;
     private bool _isDead = false;
     public Visibility gameOverVisible = Visibility.Hidden;
@@ -36,5 +37,10 @@ public class Global : ScriptableObject
     public void SaveHighScore()
     {
         PlayerPrefs.SetInt("highScore", highScore);
+    }
+
+    public void SaveCoins()
+    {
+        PlayerPrefs.SetInt("coins", coins);
     }
 }
