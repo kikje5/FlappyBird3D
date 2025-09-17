@@ -5479,16 +5479,19 @@ MonoBehaviour:
   topObstacle: {fileID: 6779022541730280746, guid: 411a2adc6588d884aba162c2dbe2c346, type: 3}
   bottomObstacle: {fileID: 2560551328660556816, guid: bc755fa68be221242bd0abfc605488cf, type: 3}
   scoreTrigger: {fileID: 5144472465209351863, guid: b11e1d07ab46b6a4eaf6d640fc61c346, type: 3}
-  obstacleSpeed: 25
+  obstacleSpeed: 0
+  waitBetweenSpawnSeconds: 0
   whereToRemoveObjects: -4
   whereToSpawnObjects: 150
-  spawnSpeed: 0.5
-  removalSpeed: 0.25
-  waitBetweenSpawnSeconds: 3
+  spawnSpeed: 2
   minGap: 2
   maxGap: 6
   minYGap: -2
   maxYGap: 4
+  startingObstacleSpeed: 25
+  startWaitBetweenSpawnSeconds: 3
+  difficultySpeedIncrease: 0.1
+  difficultySpawnIncrease: 0.005
 --- !u!4 &289046562 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 21be51b68356cff4b95b4e6726219a46, type: 3}

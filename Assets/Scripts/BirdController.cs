@@ -89,7 +89,6 @@ public class BirdController : MonoBehaviour
         global.isDead = true;
         global.isPlaying = false;
         KillBird();
-        OnJumpDisable();
     }
 
     private void KillBird()
@@ -99,6 +98,7 @@ public class BirdController : MonoBehaviour
         _rb.linearVelocity = Vector3.zero;
         _rb.angularVelocity = Vector3.zero;
         transform.position = new Vector3(transform.position.x, transform.position.y, -1);
+        OnJumpDisable();
     }
     public void Reset()
     {

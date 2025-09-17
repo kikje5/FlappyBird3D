@@ -17,14 +17,15 @@ public class ObstacleManager : MonoBehaviour
     private GameObject _topObstacleToRemove;
     private GameObject _bottomObstacleToRemove;
 
-    public float obstacleSpeed;
+    [SerializeField] private float obstacleSpeed;
+    [SerializeField] private float waitBetweenSpawnSeconds;
 
     public float whereToRemoveObjects;
     public float whereToSpawnObjects;
 
     public float spawnSpeed;
-    public float removalSpeed;
-    public float waitBetweenSpawnSeconds;
+    
+    
     private float timeSinceLastSpawn = 0;
     
     public float minGap;
@@ -32,6 +33,12 @@ public class ObstacleManager : MonoBehaviour
 
     public float minYGap;
     public float maxYGap;
+
+    public float startingObstacleSpeed;
+    public float startWaitBetweenSpawnSeconds;
+    
+    public float difficultySpeedIncrease;
+    public float difficultySpawnIncrease;
 
     private bool _isSpawning;
 
@@ -49,6 +56,8 @@ public class ObstacleManager : MonoBehaviour
 
     private void Reset()
     {
+        obstacleSpeed = startingObstacleSpeed;
+        waitBetweenSpawnSeconds  = startWaitBetweenSpawnSeconds;
         foreach (GameObject obstacle in _top)
         {
             Destroy(obstacle);
@@ -58,6 +67,7 @@ public class ObstacleManager : MonoBehaviour
         {
             Destroy(obstacle);
         }
+
         _top.Clear();
         _bottom.Clear();
         SpawnObstacle();
@@ -65,6 +75,7 @@ public class ObstacleManager : MonoBehaviour
         {
             DoUpdate(0.01f);
         }
+
         global.resetObstacles = false;
         global.resetBird = true;
     }
@@ -80,10 +91,10 @@ public class ObstacleManager : MonoBehaviour
 
     private void DoUpdate(float time)
     {
-        HandleRemovingObstacles();
+        HandleRemovingObstacles(time);
         MoveObstacles(time);
-        HandleSpawning_topObstacles();
-        HandleSpawning_bottomObstacles();
+        HandleSpawning_topObstacles(time);
+        HandleSpawning_bottomObstacles(time);
         if (_isSpawning) return;
         
         if (timeSinceLastSpawn >= waitBetweenSpawnSeconds)
@@ -93,25 +104,28 @@ public class ObstacleManager : MonoBehaviour
         }
 
         timeSinceLastSpawn += Time.deltaTime;
+        
+        obstacleSpeed += difficultySpeedIncrease * Time.deltaTime;
+        waitBetweenSpawnSeconds /= (1 + Time.deltaTime * difficultySpawnIncrease);
     }
 
-    private void HandleRemovingObstacles()
+    private void HandleRemovingObstacles(float time)
     {
         if (_topObstacleToRemove)
         {
-            _topObstacleToRemove.transform.position += new Vector3(0, 1, 0) * removalSpeed;
+            _topObstacleToRemove.transform.position += new Vector3(0, 1, 0) * (obstacleSpeed * time * spawnSpeed);
         }
 
         if (_bottomObstacleToRemove)
         {
-            _bottomObstacleToRemove.transform.position += new Vector3(0, -1, 0) * removalSpeed;
+            _bottomObstacleToRemove.transform.position += new Vector3(0, -1, 0) * (obstacleSpeed * time * spawnSpeed);
         }
     }
 
-    private void HandleSpawning_topObstacles()
+    private void HandleSpawning_topObstacles(float time)
     {
         if (!_topObstacleToSpawn) return;
-        _topObstacleToSpawn.transform.position += new Vector3(0, -1, 0) * spawnSpeed;
+        _topObstacleToSpawn.transform.position += new Vector3(0, -1, 0) * (obstacleSpeed * time * spawnSpeed);
             
         if (!(_topObstacleToSpawn.transform.position.y <= 0)) return;
 
@@ -121,10 +135,10 @@ public class ObstacleManager : MonoBehaviour
         _isSpawning = false;
     }
 
-    private void HandleSpawning_bottomObstacles()
+    private void HandleSpawning_bottomObstacles(float time)
     {
         if (!_bottomObstacleToSpawn) return;
-        _bottomObstacleToSpawn.transform.position += new Vector3(0, 1, 0) * spawnSpeed;
+        _bottomObstacleToSpawn.transform.position += new Vector3(0, 1, 0) * (obstacleSpeed * time * spawnSpeed);
             
         if (!(_bottomObstacleToSpawn.transform.position.y >= 0)) return;
             
