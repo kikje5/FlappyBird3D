@@ -83,7 +83,7 @@ public class ObstacleManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (global.isDead) return;
+        if (global.IsDead) return;
         if (global.resetObstacles) Reset();
         if (!global.isPlaying) return;
         DoUpdate(Time.deltaTime);

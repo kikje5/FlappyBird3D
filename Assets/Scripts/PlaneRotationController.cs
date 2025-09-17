@@ -28,7 +28,7 @@ public class RotationController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (global.isDead) return;
+        if (global.IsDead) return;
         float verticalSpeed = _rb.linearVelocity.y;
         float desiredXRotation =  -verticalSpeed * verticalRotationStrength;
 

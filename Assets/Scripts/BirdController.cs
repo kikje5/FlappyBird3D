@@ -1,6 +1,8 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
+using Random = UnityEngine.Random;
 
 public class BirdController : MonoBehaviour
 {
@@ -17,8 +19,12 @@ public class BirdController : MonoBehaviour
     public Global global;
     public GameObject gameOverUI;
     private UIDocument _gameOverUIDocument;
-    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    private void Awake()
+    {
+        global.highScore =  PlayerPrefs.GetInt("highScore", 0);
+    }
+
     private void Start()
     {
             _jump = _bird["Jump"];
@@ -27,15 +33,15 @@ public class BirdController : MonoBehaviour
             _particles = GetComponent<ParticleSystem>();
             _rb.useGravity = false;
             OnJumpEnable();
-            global.score = 0;
+            global.Score = 0;
             global.isPlaying = false;
-            global.isDead = false;
+            global.IsDead = false;
             _gameOverUIDocument = gameOverUI.GetComponent<UIDocument>();
     }
     
     private void FixedUpdate()
     {
-        if (global.isDead) return;
+        if (global.IsDead) return;
         if (global.resetBird) Reset();
         if (!global.isPlaying) return;
         Move();
@@ -86,7 +92,7 @@ public class BirdController : MonoBehaviour
     {
         if (!other.gameObject.CompareTag("Obstacle")) return;
         _gameOverUIDocument.enabled = true;
-        global.isDead = true;
+        global.IsDead = true;
         global.isPlaying = false;
         KillBird();
     }
@@ -99,11 +105,12 @@ public class BirdController : MonoBehaviour
         _rb.angularVelocity = Vector3.zero;
         transform.position = new Vector3(transform.position.x, transform.position.y, -1);
         OnJumpDisable();
+        global.SaveHighScore();
     }
     public void Reset()
     {
         transform.position = Vector3.zero;
-        global.score = 0;
+        global.Score = 0;
         global.resetBird = false;
         OnJumpEnable();
     }
@@ -112,6 +119,6 @@ public class BirdController : MonoBehaviour
     {
         if (!other.gameObject.CompareTag("Score")) return;
         print("Scored");
-        global.score++; 
+        global.Score++; 
     }
 }

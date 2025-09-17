@@ -19,7 +19,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
     void OnResetClick(ClickEvent evt)
     {
         Debug.Log("OnResetClick");
-        global.isDead = false;
+        global.IsDead = false;
         global.resetObstacles = true;
     }
 }
