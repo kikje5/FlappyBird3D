@@ -78,16 +78,18 @@ public class SkinShop : MonoBehaviour
         Button selectButton = plane.Q<Button>("SelectButton");
         unlockLabel.visible = !unlocked;
         selectButton.SetEnabled(unlocked);
+        selectButton.RegisterCallback(buttonFunction);  
         if (coinsNeeded < 0) return;
         if (global.coins > coinsNeeded)
         {
             selectButton.SetEnabled(true);
         }
-        selectButton.RegisterCallback(buttonFunction);
+        
     }
 
     void OnPlainSelectClicked(ClickEvent evt)
     {
+        print("plain");
         birdMaterial.CopyPropertiesFromMaterial(normalMat);
         SceneManager.LoadScene(0);
     }

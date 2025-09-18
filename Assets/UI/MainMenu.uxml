@@ -1,6 +1,6 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/SimpleCustomEditor.uss?fileID=7433441132597879392&amp;guid=2df12823a26c8bb48b0d11161e05f762&amp;type=3#SimpleCustomEditor" />
-    <ui:VisualElement focusable="true" name="MainMenu" enabled="true" style="flex-grow: 1; justify-content: space-evenly; align-content: flex-start; align-items: center; display: flex;">
+    <ui:VisualElement focusable="true" name="MainMenu" enabled="true" style="flex-grow: 1; justify-content: space-evenly; align-content: flex-start; align-items: center; display: none;">
         <ui:VisualElement style="flex-grow: 0; width: auto; height: auto;">
             <ui:Label text="FlappyPlane" name="Title" class="score-text" style="font-size: 64px; color: rgb(255, 255, 255);" />
             <ui:Label text="Plane simple fun" name="subTitle" class="score-text" style="font-size: 32px; -unity-text-align: upper-center; color: rgb(255, 255, 255);" />
@@ -9,9 +9,10 @@
         <ui:Button text="Start Game" name="StartGameButton" class="score-text" style="font-size: 32px; width: 20%;" />
         <ui:Button text="Change Skin" name="SkinButton" class="score-text" style="font-size: 32px; width: 20%;" />
         <ui:Button text="Settings" name="SettingsButton" class="score-text" style="font-size: 32px; width: 20%;" />
+        <ui:Button text="Tutorial" name="TutorialButton" class="score-text" style="font-size: 32px; width: 20%;" />
         <ui:Button text="Exit" name="ExitButton" class="score-text" style="font-size: 32px; width: 20%;" />
     </ui:VisualElement>
-    <ui:VisualElement name="SettingsMenu" style="flex-grow: 1; display: flex;">
+    <ui:VisualElement name="SettingsMenu" style="flex-grow: 1; display: none; visibility: visible;">
         <ui:VisualElement name="Sound" style="flex-grow: 1; align-items: center; justify-content: space-evenly;">
             <ui:Label text="Audio" name="Audio" class="score-text" style="font-size: 48px; color: rgb(255, 255, 255);" />
             <ui:SliderInt label="Master" value="42" high-value="100" show-input-field="false" fill="true" focusable="true" name="MasterSlider" class="score-text" style="width: 50%; justify-content: flex-start; font-size: 32px; flex-grow: 0; align-self: auto; align-items: stretch; color: rgb(255, 255, 255);" />
@@ -30,6 +31,24 @@
         </ui:VisualElement>
         <ui:VisualElement style="flex-grow: 1; justify-content: space-evenly; align-items: center;">
             <ui:Button text="Back To Main Menu" name="BackToMain" class="score-text" style="font-size: 32px;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="Tutorial" style="flex-grow: 1; display: flex; visibility: visible;">
+        <ui:Label text="Tutorial" name="Text" class="score-text" style="font-size: 64px; color: rgb(255, 255, 255); align-self: center;" />
+        <ui:VisualElement name="Controlls" style="flex-grow: 1; align-items: center; justify-content: flex-start;">
+            <ui:Label text="Controlls" name="Text" class="score-text" style="font-size: 48px; color: rgb(255, 255, 255);" />
+            <ui:Label text="- &apos;w&apos; or &apos;space&apos; to jump&#10;&#10;- &apos;a&apos; or &apos;d&apos; to move" name="Text" class="score-text" style="font-size: 48px; color: rgb(255, 255, 255);" />
+        </ui:VisualElement>
+        <ui:VisualElement name="Controlls" style="flex-grow: 1; align-items: center; justify-content: flex-start;">
+            <ui:Label text="Power-ups" name="Text" class="score-text" style="font-size: 48px; color: rgb(255, 255, 255);" />
+            <ui:Label text="- shield: protects you once&#10;&#10;- minimize: makes you smaller&#10;&#10;- dubbler: dubbles poins &amp; coins" name="Text" class="score-text" style="font-size: 48px; color: rgb(255, 255, 255);" />
+        </ui:VisualElement>
+        <ui:VisualElement name="Controlls" style="flex-grow: 1; align-items: center; justify-content: flex-start;">
+            <ui:Label text="Goal" name="Text" class="score-text" style="font-size: 48px; color: rgb(255, 255, 255);" />
+            <ui:Label text="Survive as long as you can." name="Text" class="score-text" style="font-size: 48px; color: rgb(255, 255, 255);" />
+        </ui:VisualElement>
+        <ui:VisualElement style="flex-grow: 1; justify-content: space-evenly; align-items: center;">
+            <ui:Button text="Back To Main Menu" name="TutorialBackToMain" class="score-text" style="font-size: 32px;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

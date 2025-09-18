@@ -8,6 +8,7 @@ public class MainMenu : MonoBehaviour
     private Button _startButton;
     private Button _skinButton;
     private Button _settingsButton;
+    private Button _tutorialButton;
     private Button _exitButton;
     private Button _backToMenuButton;
     private SliderInt _masterVolumeSlider;
@@ -15,6 +16,8 @@ public class MainMenu : MonoBehaviour
     private SliderInt _musicVolumeSlider;
     private VisualElement _mainMenu;
     private VisualElement _settingsMenu;
+    private VisualElement _tutorial;
+    private Button _tutorialBackButton;
     public Settings settings;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -23,15 +26,20 @@ public class MainMenu : MonoBehaviour
         _uiDocument = GetComponent<UIDocument>();
         _mainMenu  = _uiDocument.rootVisualElement.Query<VisualElement>("MainMenu");
         _settingsMenu = _uiDocument.rootVisualElement.Query<VisualElement>("SettingsMenu");
+        _tutorial = _uiDocument.rootVisualElement.Query<VisualElement>("Tutorial");
+        _tutorialBackButton = _tutorial.Query<Button>("TutorialBackToMain");
         
         _startButton = _mainMenu.Query<Button>("StartGameButton");
         _skinButton = _mainMenu.Query<Button>("SkinButton");
         _settingsButton = _mainMenu.Query<Button>("SettingsButton");
+        _tutorialButton = _mainMenu.Query<Button>("TutorialButton");
         _exitButton = _mainMenu.Query<Button>("ExitButton");
         _startButton.RegisterCallback<ClickEvent>(OnStartClick);
         _skinButton.RegisterCallback<ClickEvent>(OnSkinButtonClick);
         _settingsButton.RegisterCallback<ClickEvent>(OnSettingsClick);
         _exitButton.RegisterCallback<ClickEvent>(OnExitClick);
+        _tutorialButton.RegisterCallback<ClickEvent>(OnTutorialButtonClick);
+        _tutorialBackButton.RegisterCallback<ClickEvent>(TutorialBackToMainClick);
         
         _backToMenuButton =  _settingsMenu.Query<Button>("BackToMain");
         _backToMenuButton.RegisterCallback<ClickEvent>(OnBackToMenuClick);
@@ -49,6 +57,7 @@ public class MainMenu : MonoBehaviour
         
         _settingsMenu.style.display = DisplayStyle.None;
         _mainMenu.style.display = DisplayStyle.Flex;
+        _tutorial.style.display = DisplayStyle.None;
         
         settings.MasterVolume = PlayerPrefs.GetInt("MasterVolume", 80);
         settings.MusicVolume = PlayerPrefs.GetInt("MusicVolume", 80);
@@ -89,6 +98,14 @@ public class MainMenu : MonoBehaviour
     {
         _mainMenu.style.display = DisplayStyle.None;
         _settingsMenu.style.display = DisplayStyle.Flex;
+        _tutorial.style.display = DisplayStyle.None;
+    }
+
+    void OnTutorialButtonClick(ClickEvent evt)
+    {
+        _tutorial.style.display = DisplayStyle.Flex;
+        _mainMenu.style.display = DisplayStyle.None;
+        _settingsMenu.style.display = DisplayStyle.None;
     }
 
     void OnBackToMenuClick(ClickEvent evt)
@@ -98,6 +115,14 @@ public class MainMenu : MonoBehaviour
         PlayerPrefs.SetInt("MusicVolume", settings.MusicVolume);
         PlayerPrefs.SetInt("SfxVolume", settings.SfxVolume);
         _mainMenu.style.display = DisplayStyle.Flex;
+        _settingsMenu.style.display = DisplayStyle.None;
+        _tutorial.style.display = DisplayStyle.None;
+    }
+
+    void TutorialBackToMainClick(ClickEvent evt)
+    {
+        _mainMenu.style.display = DisplayStyle.Flex;
+        _tutorial.style.display = DisplayStyle.None;
         _settingsMenu.style.display = DisplayStyle.None;
     }
 
