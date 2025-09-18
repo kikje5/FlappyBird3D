@@ -13,9 +13,9 @@
     <ui:VisualElement name="SettingsMenu" style="flex-grow: 1; display: flex;">
         <ui:VisualElement name="Sound" style="flex-grow: 1; align-items: center; justify-content: space-evenly;">
             <ui:Label text="Audio" name="Audio" class="score-text" style="font-size: 48px; color: rgb(255, 255, 255);" />
-            <ui:SliderInt label="Master" value="42" high-value="100" show-input-field="false" fill="true" focusable="true" name="MasterVolume" class="score-text" style="width: 50%; justify-content: flex-start; font-size: 32px; flex-grow: 0; align-self: auto; align-items: stretch; color: rgb(255, 255, 255);" />
-            <ui:SliderInt label="Music" value="42" high-value="100" show-input-field="false" fill="true" page-size="0" name="Music" class="score-text" style="width: 50%; font-size: 32px; color: rgb(255, 255, 255);" />
-            <ui:SliderInt label="SFX" value="42" high-value="100" show-input-field="false" direction="Horizontal" inverted="false" fill="true" name="SFX" class="score-text" style="width: 50%; font-size: 32px; height: auto; color: rgb(255, 255, 255);" />
+            <ui:SliderInt label="Master" value="42" high-value="100" show-input-field="false" fill="true" focusable="true" name="MasterSlider" class="score-text" style="width: 50%; justify-content: flex-start; font-size: 32px; flex-grow: 0; align-self: auto; align-items: stretch; color: rgb(255, 255, 255);" />
+            <ui:SliderInt label="   Music‎‎" value="42" high-value="100" show-input-field="false" fill="true" page-size="0" name="MusicSlider" class="score-text" style="width: 50%; font-size: 32px; color: rgb(255, 255, 255);" />
+            <ui:SliderInt label="      SFX" value="42" high-value="100" show-input-field="false" direction="Horizontal" inverted="false" fill="true" name="SFXSlider" class="score-text" style="width: 50%; font-size: 32px; height: auto; color: rgb(255, 255, 255);" />
         </ui:VisualElement>
         <ui:VisualElement name="SMTNGELSE" style="flex-grow: 1; align-items: center; justify-content: space-evenly;">
             <ui:Label text="Other" class="score-text" style="align-items: center; font-size: 48px; color: rgb(255, 255, 255);" />
