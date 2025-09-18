@@ -2,6 +2,7 @@
     <ui:VisualElement name="VisualElement" enabled="true" style="flex-grow: 1; flex-shrink: 1; align-items: center; justify-content: center; visibility: visible; display: flex; opacity: 1;">
         <ui:Label text="GameOver" name="GameOver" style="-unity-font-definition: url(&quot;project://database/Assets/UI/Fonts/operius-mono.ttf?fileID=12800000&amp;guid=7158c7d6acfd8a14b8e02f2f0928c106&amp;type=3#operius-mono&quot;); font-size: 64px;" />
         <ui:Button text="Retry" parse-escape-sequences="false" name="Retry" double-click-selects-word="true" style="-unity-font-definition: url(&quot;project://database/Assets/UI/Fonts/operius-mono.ttf?fileID=12800000&amp;guid=7158c7d6acfd8a14b8e02f2f0928c106&amp;type=3#operius-mono&quot;); font-size: 32px;" />
+        <ui:Button text="Return To Main Menu" parse-escape-sequences="false" name="ReturnMainMenu" double-click-selects-word="true" style="-unity-font-definition: url(&quot;project://database/Assets/UI/Fonts/operius-mono.ttf?fileID=12800000&amp;guid=7158c7d6acfd8a14b8e02f2f0928c106&amp;type=3#operius-mono&quot;); font-size: 32px;" />
         <Bindings>
             <ui:DataBinding property="style.visibility" data-source-path="gameOverVisible" data-source="project://database/Assets/Scripts/Global.asset?fileID=11400000&amp;guid=aaeaddb3d24c19642a8e78ec0050c390&amp;type=2#Global" binding-mode="ToTarget" />
         </Bindings>
