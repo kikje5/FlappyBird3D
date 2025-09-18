@@ -6,6 +6,7 @@ public class MainMenu : MonoBehaviour
 {
     private UIDocument _uiDocument;
     private Button _startButton;
+    private Button _skinButton;
     private Button _settingsButton;
     private Button _exitButton;
     private Button _backToMenuButton;
@@ -24,9 +25,11 @@ public class MainMenu : MonoBehaviour
         _settingsMenu = _uiDocument.rootVisualElement.Query<VisualElement>("SettingsMenu");
         
         _startButton = _mainMenu.Query<Button>("StartGameButton");
+        _skinButton = _mainMenu.Query<Button>("SkinButton");
         _settingsButton = _mainMenu.Query<Button>("SettingsButton");
         _exitButton = _mainMenu.Query<Button>("ExitButton");
         _startButton.RegisterCallback<ClickEvent>(OnStartClick);
+        _skinButton.RegisterCallback<ClickEvent>(OnSkinButtonClick);
         _settingsButton.RegisterCallback<ClickEvent>(OnSettingsClick);
         _exitButton.RegisterCallback<ClickEvent>(OnExitClick);
         
@@ -75,6 +78,11 @@ public class MainMenu : MonoBehaviour
     void OnStartClick(ClickEvent evt)
     {
         SceneManager.LoadScene(1);
+    }
+
+    void OnSkinButtonClick(ClickEvent evt)
+    {
+        SceneManager.LoadScene(2);
     }
 
     void OnSettingsClick(ClickEvent evt)

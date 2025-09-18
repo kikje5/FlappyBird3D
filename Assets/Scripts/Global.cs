@@ -84,4 +84,10 @@ public class Global : ScriptableObject
     {
         PlayerPrefs.SetInt("coins", coins);
     }
+
+    public void AddPlayTime()
+    {
+        int currentPlayTime =  PlayerPrefs.GetInt("playTimes", 0);
+        PlayerPrefs.SetInt("playTimes", currentPlayTime + 1);
+    }
 }

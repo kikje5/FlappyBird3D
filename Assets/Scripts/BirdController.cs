@@ -129,6 +129,7 @@ public class BirdController : MonoBehaviour
         OnJumpDisable();
         global.SaveHighScore();
         global.SaveCoins();
+        global.AddPlayTime();
     }
     public void Reset()
     {
