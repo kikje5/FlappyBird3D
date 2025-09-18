@@ -25,7 +25,24 @@
                     <ui:DataBinding property="text" data-source-path="coins" data-source="project://database/Assets/Scripts/Global.asset?fileID=11400000&amp;guid=aaeaddb3d24c19642a8e78ec0050c390&amp;type=2#Global" binding-mode="ToTarget" />
                 </Bindings>
             </ui:Label>
-            <ui:VisualElement style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Textures/coin.png?fileID=2800000&amp;guid=8098a5497b70bde4bb9e945b77e767ae&amp;type=3#coin&quot;); -unity-background-scale-mode: scale-to-fit; background-position-x: right 0; background-position-y: top 0; background-size: 64px 64px; flex-basis: auto; position: relative; width: 64px; height: 64px;" />
+            <ui:VisualElement name="Coin" style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Textures/coin.png?fileID=2800000&amp;guid=8098a5497b70bde4bb9e945b77e767ae&amp;type=3#coin&quot;); -unity-background-scale-mode: scale-to-fit; background-position-x: right 0; background-position-y: top 0; background-size: 64px 64px; flex-basis: auto; position: relative; width: 64px; height: 64px;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement style="flex-grow: 1; justify-content: flex-start; flex-direction: row; align-items: flex-end;">
+        <ui:VisualElement name="Shield" style="flex-grow: 0; width: 64px; height: 64px; background-image: url(&quot;project://database/Assets/Textures/Shield.png?fileID=2800000&amp;guid=54808f963c9d004438de67174afe9bea&amp;type=3#Shield&quot;); justify-content: flex-start; display: flex;">
+            <Bindings>
+                <ui:DataBinding property="style.display" data-source-path="shieldIconVisible" data-source="project://database/Assets/Scripts/Global.asset?fileID=11400000&amp;guid=aaeaddb3d24c19642a8e78ec0050c390&amp;type=2#Global" binding-mode="ToTarget" />
+            </Bindings>
+        </ui:VisualElement>
+        <ui:VisualElement name="Shrink" style="flex-grow: 0; width: 64px; height: 64px; background-image: url(&quot;project://database/Assets/Textures/Shrink.png?fileID=2800000&amp;guid=2fb7339d4b3f7cf4a8f02ca6e96c0ea4&amp;type=3#Shrink&quot;); justify-content: flex-start;">
+            <Bindings>
+                <ui:DataBinding property="style.display" data-source-path="shrinkIconVisible" data-source="project://database/Assets/Scripts/Global.asset?fileID=11400000&amp;guid=aaeaddb3d24c19642a8e78ec0050c390&amp;type=2#Global" binding-mode="ToTarget" />
+            </Bindings>
+        </ui:VisualElement>
+        <ui:VisualElement name="Double" style="flex-grow: 0; width: 64px; height: 64px; background-image: url(&quot;project://database/Assets/Textures/Double.png?fileID=2800000&amp;guid=73f60d9fbd500ff478f66573e8d9b479&amp;type=3#Double&quot;); justify-content: flex-start;">
+            <Bindings>
+                <ui:DataBinding property="style.display" data-source-path="doubleIconVisible" data-source="project://database/Assets/Scripts/Global.asset?fileID=11400000&amp;guid=aaeaddb3d24c19642a8e78ec0050c390&amp;type=2#Global" binding-mode="ToTarget" />
+            </Bindings>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

@@ -5580,6 +5580,10 @@ MonoBehaviour:
   bottomObstacle: {fileID: 2560551328660556816, guid: bc755fa68be221242bd0abfc605488cf, type: 3}
   scoreTrigger: {fileID: 5144472465209351863, guid: b11e1d07ab46b6a4eaf6d640fc61c346, type: 3}
   coinPrefab: {fileID: 7035842724349335626, guid: ea558bd693a8d484c9f84a3a14b3c8f6, type: 3}
+  shieldPowerUp: {fileID: 5757049789270944669, guid: 92335d5301058d5479f3be8809ee59a2, type: 3}
+  shrinkPowerUp: {fileID: 3403111127292197901, guid: bed12d906bfae1c4da385a71916580b8, type: 3}
+  doublePowerUp: {fileID: 250480656330264247, guid: 2afec322b0e33d045a246143e21c0a6c, type: 3}
+  powerUpChance: 0.5
   obstacleSpeed: 0
   waitBetweenSpawnSeconds: 0
   whereToRemoveObjects: -4
@@ -5735,37 +5739,6 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
---- !u!1 &333462334
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 333462335}
-  m_Layer: 0
-  m_Name: ShieldPowerUp
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &333462335
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 333462334}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -7076,4 +7049,3 @@ SceneRoots:
   - {fileID: 62356512}
   - {fileID: 926001545}
   - {fileID: 582111073}
-  - {fileID: 333462335}

@@ -22,10 +22,16 @@ public class BirdController : MonoBehaviour
     public GameObject gameOverUI;
     private UIDocument _gameOverUIDocument;
 
+    public float shrinkDurationSeconds;
+    public float doubleDurationSeconds;
+
+    public GameObject shield;
+
     private void Awake()
     {
         global.highScore =  PlayerPrefs.GetInt("highScore", 0);
         global.coins = PlayerPrefs.GetInt("coins", 0);
+        
     }
 
     private void Start()
@@ -40,10 +46,12 @@ public class BirdController : MonoBehaviour
             global.isPlaying = false;
             global.IsDead = false;
             _gameOverUIDocument = gameOverUI.GetComponent<UIDocument>();
+            Reset();
     }
     
     private void FixedUpdate()
     {
+        shield.SetActive(global.ShieldIsActive);
         if (global.IsDead) return;
         if (global.resetBird) Reset();
         if (!global.isPlaying) return;
@@ -99,6 +107,11 @@ public class BirdController : MonoBehaviour
     private void CheckObstacleCollision(Collision other)
     {
         if (!other.gameObject.CompareTag("Obstacle")) return;
+        if (global.ShieldIsActive)
+        {
+            global.ShieldIsActive = false;
+            return;
+        }
         _gameOverUIDocument.enabled = true;
         global.IsDead = true;
         global.isPlaying = false;
@@ -123,25 +136,65 @@ public class BirdController : MonoBehaviour
         global.Score = 0;
         global.resetBird = false;
         OnJumpEnable();
+        global.ShrinkIsActive = false;
+        global.ShieldIsActive = false;
+        global.DoubleIsActive = false;
     }
 
     private void OnTriggerEnter(Collider other)
     {
         CheckScoreTrigger(other);
         CheckCoinTrigger(other);
+        CheckShieldTrigger(other);
+        CheckShrinkTrigger(other);
+        CheckDoubleTrigger(other);
     }
 
     private void CheckScoreTrigger(Collider other)
     {
         if (!other.gameObject.CompareTag("Score")) return;
-        global.Score++; 
+        global.Score++;
+        if (global.DoubleIsActive)
+        {
+            global.Score++;
+        }
     }
     private void CheckCoinTrigger(Collider other)
     {
         if (!other.gameObject.CompareTag("Coin")) return;
         global.coins++;
+        if (global.DoubleIsActive)
+        {
+            global.coins++;
+        }
         other.gameObject.SetActive(false);
         coinAudio.pitch = Random.Range(1f - coinPitchRange, 1f + coinPitchRange);
         coinAudio.Play();
+    }
+
+    private void CheckShieldTrigger(Collider other)
+    {
+        if (!other.gameObject.CompareTag("ShieldPowerUp")) return;
+        print("shield");
+        other.gameObject.SetActive(false);
+        global.ShieldIsActive = true;
+    }
+
+    private void CheckShrinkTrigger(Collider other)
+    {
+        if (!other.gameObject.CompareTag("ShrinkPowerUp")) return;
+        print("Shrink");
+        other.gameObject.SetActive(false);
+        global.ShrinkIsActive = true;
+        global.shrinkTimer = shrinkDurationSeconds;
+    }
+
+    private void CheckDoubleTrigger(Collider other)
+    {
+        if (!other.gameObject.CompareTag("DoublePowerUp")) return;
+        print("Double");
+        other.gameObject.SetActive(false);
+        global.DoubleIsActive = true;
+        global.doubleTimer = doubleDurationSeconds;
     }
 }

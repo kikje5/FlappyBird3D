@@ -11,6 +11,8 @@ public class RotationController : MonoBehaviour
     private InputAction _move;
     private Rigidbody _rb;
     public Transform rotateMesh;
+    
+    private bool meshIsShrunk = false;
 
     public float verticalRotationStrength;
 
@@ -53,5 +55,17 @@ public class RotationController : MonoBehaviour
         
 
         rotateMesh.rotation = Quaternion.Euler(xRotation, 0, zRotation);
+
+        if (global.ShrinkIsActive &&  !meshIsShrunk)
+        {
+            rotateMesh.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            meshIsShrunk = true;
+        }
+
+        if (!global.ShrinkIsActive && meshIsShrunk)
+        {
+            rotateMesh.localScale = new Vector3(1f,1f,1f);
+            meshIsShrunk = false;
+        }
     }
 }

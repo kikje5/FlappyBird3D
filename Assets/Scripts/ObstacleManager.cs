@@ -10,6 +10,11 @@ public class ObstacleManager : MonoBehaviour
     public GameObject bottomObstacle;
     public GameObject scoreTrigger;
     public GameObject coinPrefab;
+    public GameObject shieldPowerUp;
+    public GameObject shrinkPowerUp;
+    public GameObject doublePowerUp;
+
+    public float powerUpChance;
     
     private GameObject _topObstacleToSpawn;
     private GameObject _bottomObstacleToSpawn;
@@ -84,6 +89,24 @@ public class ObstacleManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (global.ShrinkIsActive)
+        {
+            global.shrinkTimer -= Time.deltaTime;
+            if (global.shrinkTimer <= 0)
+            {
+                global.ShrinkIsActive = false;
+            }
+        }
+
+        if (global.DoubleIsActive)
+        {
+            global.doubleTimer -= Time.deltaTime;
+            if (global.doubleTimer <= 0)
+            {
+                global.DoubleIsActive = false;
+            }
+        }
+        
         if (global.IsDead) return;
         if (global.resetObstacles) Reset();
         if (!global.isPlaying) return;
@@ -216,25 +239,49 @@ public class ObstacleManager : MonoBehaviour
         
         Instantiate(scoreTrigger, bottom.transform);
 
-        int coinX;
-        float coinY;
+        int itemX;
+        float itemY;
         if (leftGap < rightGap && leftGap < middleGap) // left is smallest
         {
-            coinX = left;
-            coinY = leftYGap;
+            itemX = left;
+            itemY = leftYGap;
         }
         else if (middleGap < rightGap) // middle is smallest
         {
-            coinX = middle;
-            coinY = middleYGap;
+            itemX = middle;
+            itemY = middleYGap;
         }
         else //right is smallest
         {
-            coinX = right;
-            coinY = rightYGap;
+            itemX = right;
+            itemY = rightYGap;
         }
-        GameObject coin = Instantiate(coinPrefab, bottom.transform);
-        coin.transform.position += new Vector3(coinX, coinY, 0);
+
+        bool spawnCoin = Random.value > powerUpChance;
+        GameObject itemToSpawn;
+        if (spawnCoin) //coin
+        {
+            itemToSpawn = Instantiate(coinPrefab, bottom.transform);
+            
+        }
+        else // powerup
+        {
+            int powerUpToSpawn = Random.Range(0, 3);
+            if (powerUpToSpawn == 0) // spawn Shield power-up
+            {
+                itemToSpawn = Instantiate(shieldPowerUp,bottom.transform);
+            }
+            else if (powerUpToSpawn == 1) // spawn shrink power-up
+            {
+                itemToSpawn = Instantiate(shrinkPowerUp, bottom.transform);
+            }
+            else // spawn double power-up
+            {
+                itemToSpawn = Instantiate(doublePowerUp, bottom.transform);
+            }
+        }
+        itemToSpawn.transform.position += new Vector3(itemX, itemY, 0);
+        
         
         
         top.transform.position += new Vector3(0, 15, whereToSpawnObjects);
